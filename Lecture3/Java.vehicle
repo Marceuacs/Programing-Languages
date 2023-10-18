@@ -1,0 +1,103 @@
+class Car {
+    private String type;
+    private int no_seats;
+    private String fuel;
+    private String body_color;
+
+    Car() {
+        type = "";
+        no_seats = 0;
+        fuel = "";
+        body_color = "";
+    }
+
+    Car(String type, int seats, String fuel, String body_color) {
+        this.type = type;
+        this.no_seats = seats;
+        this.fuel = fuel;
+        this.body_color = body_color;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getNoSeats() {
+        return no_seats;
+    }
+
+    public void setNoSeats(int seats) {
+        this.no_seats = seats;
+    }
+
+    public String getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(String fuel) {
+        this.fuel = fuel;
+    }
+
+    public String getBodyColor() {
+        return body_color;
+    }
+
+    public void setBodyColor(String body_color) {
+        this.body_color = body_color;
+    }
+}
+
+class Vehicle {
+    public static void main(String[] args) {
+        // Create two Car objects, one using the parameterized constructor and another without parameters.
+        Car car1 = new Car("Your favorite car", 5, "Gasoline", "Red");
+        Car car2 = new Car();
+
+        // Invoke the get methods for both objects
+        System.out.println("Car 1 Type: " + car1.getType());
+        System.out.println("Car 1 No. of Seats: " + car1.getNoSeats());
+        System.out.println("Car 1 Fuel: " + car1.getFuel());
+        System.out.println("Car 1 Body Color: " + car1.getBodyColor());
+
+        System.out.println("Car 2 Type: " + car2.getType());
+        System.out.println("Car 2 No. of Seats: " + car2.getNoSeats());
+        System.out.println("Car 2 Fuel: " + car2.getFuel());
+        System.out.println("Car 2 Body Color: " + car2.getBodyColor());
+
+        // Assign values to the attributes of the second object using the corresponding set methods
+        car2.setType("Economy car");
+        car2.setNoSeats(4);
+        car2.setFuel("Electric");
+        car2.setBodyColor("Blue");
+
+        // Invoke the get methods of the second object after setting the values
+        System.out.println("Car 2 Type: " + car2.getType());
+        System.out.println("Car 2 No. of Seats: " + car2.getNoSeats());
+        System.out.println("Car 2 Fuel: " + car2.getFuel());
+        System.out.println("Car 2 Body Color: " + car2.getBodyColor());
+
+        // Create a method spec() which will return all the data for a specific car object
+        spec(car1);
+        spec(car2);
+
+        // Compare the number of passengers (seats) for both automobiles and output an appropriate message
+        if (car1.getNoSeats() > car2.getNoSeats()) {
+            System.out.println("Car 1 has more passenger seats.");
+        } else if (car1.getNoSeats() < car2.getNoSeats()) {
+            System.out.println("Car 2 has more passenger seats.");
+        } else {
+            System.out.println("Both cars have the same number of passenger seats.");
+        }
+    }
+
+    public static void spec(Car car) {
+        System.out.println("Car Type: " + car.getType());
+        System.out.println("No. of Seats: " + car.getNoSeats());
+        System.out.println("Fuel: " + car.getFuel());
+        System.out.println("Body Color: " + car.getBodyColor());
+    }
+}

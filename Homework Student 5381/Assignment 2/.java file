@@ -1,0 +1,39 @@
+import java.text.DecimalFormat;
+
+public class SalaryCalculator {
+    public static void main(String[] args) {
+        // Employee data
+        String employeeName = "John Doe";
+        double grossSalary = 50000.0;
+
+        // Calculate state taxes
+        double stateTaxRate = 0.284;
+        double stateTaxes = Math.round(grossSalary * stateTaxRate);
+
+        // Calculate personal tax
+        double personalTax = 0;
+        double taxableIncome = grossSalary - stateTaxes - 7000;
+
+        if (taxableIncome > 0) {
+            double personalTaxRate = 0.10;
+            personalTax = Math.round(taxableIncome * personalTaxRate);
+        }
+
+        // Calculate net salary
+        double netSalary = Math.round(grossSalary - stateTaxes - personalTax);
+
+        // Format the values with commas for thousands separator
+        DecimalFormat df = new DecimalFormat("#,###");
+        String formattedGrossSalary = df.format(grossSalary);
+        String formattedStateTaxes = df.format(stateTaxes);
+        String formattedPersonalTax = df.format(personalTax);
+        String formattedNetSalary = df.format(netSalary);
+
+        // Print the results
+        System.out.println("Employee Name: " + employeeName);
+        System.out.println("Gross Salary: $" + formattedGrossSalary);
+        System.out.println("State Taxes: $" + formattedStateTaxes);
+        System.out.println("Personal Tax: $" + formattedPersonalTax);
+        System.out.println("Net Salary: $" + formattedNetSalary);
+    }
+}

@@ -1,0 +1,42 @@
+public class StringOperations {
+    public static void main(String[] args) {
+        String inputString = "Hello, World!";
+
+        // Find the first letter
+        char firstCharacter = inputString.charAt(0);
+
+        // Find the last letter
+        char lastCharacter = inputString.charAt(inputString.length() - 1);
+
+        // Find the middle letter
+        int middleIndex = inputString.length() / 2;
+        char middleCharacter;
+
+        if (inputString.length() % 2 == 0) {
+            middleCharacter = inputString.charAt(middleIndex);
+        } else {
+            middleCharacter = inputString.charAt(middleIndex);
+        }
+
+        // Calculate the sum of character codes
+        int sumOfCharacterCodes = (int) firstCharacter + (int) lastCharacter + (int) middleCharacter;
+
+        // Find the character with the biggest value (highest code)
+        char characterWithBiggestValue = firstCharacter;
+
+        if (lastCharacter > characterWithBiggestValue) {
+            characterWithBiggestValue = lastCharacter;
+        }
+
+        if (middleCharacter > characterWithBiggestValue) {
+            characterWithBiggestValue = middleCharacter;
+        }
+
+        // Print the results
+        System.out.println("First Letter: " + firstCharacter);
+        System.out.println("Last Letter: " + lastCharacter);
+        System.out.println("Middle Letter: " + middleCharacter);
+        System.out.println("Sum of Character Codes: " + sumOfCharacterCodes);
+        System.out.println("Character with the Biggest Value: " + characterWithBiggestValue);
+    }
+}

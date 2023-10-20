@@ -1,0 +1,25 @@
+import java.text.DecimalFormat;
+
+public class RandomDecimalNumber {
+    public static void main(String[] args) {
+        // Generate a random decimal number between 0 and 100
+        double randomNumber = Math.random() * 100;
+
+        // Extract the integer and decimal parts
+        int integerPart = (int) randomNumber;
+        double decimalPart = randomNumber - integerPart;
+
+        // Convert the integer part to a character
+        char characterFromCode = (char) integerPart;
+
+        // Format the decimal number to two decimal places
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        String formattedRandomNumber = decimalFormat.format(randomNumber);
+
+        // Print the results with proper formatting
+        System.out.println("Random Decimal Number: " + formattedRandomNumber);
+        System.out.println("Integer Part: " + integerPart);
+        System.out.println("Decimal Part: " + decimalFormat.format(decimalPart));
+        System.out.println("Character from CODE: " + characterFromCode);
+    }
+}

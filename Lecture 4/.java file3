@@ -1,0 +1,32 @@
+import java.util.Scanner;
+import java.time.Year;
+
+public class PersonalInfo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt for name, year of birth, and height
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter your year of birth: ");
+        int yearOfBirth = scanner.nextInt();
+
+        System.out.print("Enter your height in meters (e.g., 1.69): ");
+        double heightInMeters = scanner.nextDouble();
+
+        // Calculate age
+        int currentYear = Year.now().getValue();
+        int age = currentYear - yearOfBirth;
+
+        // Convert height to centimeters
+        double heightInCentimeters = heightInMeters * 100;
+
+        // Output the results
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age + " years");
+        System.out.println("Height: " + heightInCentimeters + " centimeters");
+
+        scanner.close();
+    }
+}

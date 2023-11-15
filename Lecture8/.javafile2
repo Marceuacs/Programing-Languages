@@ -1,0 +1,86 @@
+import java.util.Random;
+
+interface Average {
+    float average();
+}
+
+interface Scholarship {
+    float rate();
+}
+
+class Person {
+    protected String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+}
+
+class Employee extends Person implements Average {
+    protected int numSalaries;
+    protected int[] salaries;
+
+    public Employee(String name, int numSalaries) {
+        super(name);
+        this.numSalaries = numSalaries;
+        this.salaries = new Random().ints(numSalaries, 0, 30001).toArray();
+    }
+
+    @Override
+    public float average() {
+        return (numSalaries == 0) ? 0 : (float) java.util.Arrays.stream(salaries).average().orElse(0);
+    }
+}
+
+class Student extends Person implements Average, Scholarship {
+    private int numGrades;
+    private Employee parent1, parent2;
+    private int[] grades;
+
+    public Student(String name, int numGrades, Employee parent1, Employee parent2) {
+        super(name);
+        this.numGrades = numGrades;
+        this.parent1 = parent1;
+        this.parent2 = parent2;
+        this.grades = new Random().ints(numGrades, 5, 11).toArray();
+    }
+
+    @Override
+    public float average() {
+        return (float) java.util.Arrays.stream(grades).average().orElse(0);
+    }
+
+    @Override
+    public float rate() {
+        return average() * 6 + (60000 - (parent1.average() + parent2.average()) / 2) * 4;
+    }
+
+    public void displayInfo() {
+        System.out.println("Student Data:");
+        System.out.println("1. Name: " + name);
+        System.out.printf("2. GPA: %.2f\n", average());
+        System.out.println("3. First Parent: " + parent1.name + ", Average Salary: " + String.format("%.2f", parent1.average()));
+        System.out.println("4. Second Parent: " + parent2.name + ", Average Salary: " + String.format("%.2f", parent2.average()));
+        System.out.printf("5. Scholarship Points: %.2f\n", rate());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Employee[] employees = new Employee[6];
+        for (int i = 0; i < 6; i++) {
+            employees[i] = new Employee((i < 2) ? "Unemployed Parent" + (i + 1) : "Parent" + (i + 1), (i < 2) ? 0 : 6);
+        }
+
+        Student[] students = new Student[3];
+        for (int i = 0; i < 3; i++) {
+            students[i] = new Student("Student" + (i + 1), 6, employees[i * 2], employees[i * 2 + 1]);
+        }
+
+        Student scholarshipWinner = java.util.Arrays.stream(students).max(java.util.Comparator.comparingDouble(Student::rate)).orElse(null);
+
+        System.out.println("Announcing the student that will get the scholarship:");
+        assert scholarshipWinner != null;
+        scholarshipWinner.displayInfo();
+    }
+}

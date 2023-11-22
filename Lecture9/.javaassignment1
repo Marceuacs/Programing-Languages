@@ -1,0 +1,52 @@
+class Test {
+    private String s;
+
+    // Constructor with no parameters
+    public Test() {
+        this.s = "Programming languages";
+    }
+
+    // Constructor with one parameter
+    public Test(String s) {
+        this.s = s;
+    }
+
+    public void method1() {
+        System.out.println("Value of s: " + s);
+    }
+
+    public void method2(int n) {
+        System.out.println("Value of n: " + n);
+    }
+
+    private void method3() {
+        System.out.println("Private method is invoked");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create an object of the Test class using the default constructor
+        Test testObj1 = new Test();
+        testObj1.method1();  // Print the default value of s
+        testObj1.method2(42);  // Print the value of n
+
+        // Create an object of the Test class using the parameterized constructor
+        Test testObj2 = new Test("Java Programming");
+        testObj2.method1();  // Print the provided value of s
+        testObj2.method2(99);  // Print the value of n
+
+        // Accessing a private method indirectly (not recommended for beginners)
+        // For learning purposes only; in real-world scenarios, it's better to keep methods private
+        try {
+            // Access the private method using reflection
+            java.lang.reflect.Method privateMethod = Test.class.getDeclaredMethod("method3");
+            privateMethod.setAccessible(true);
+            
+            // Invoke the private method
+            privateMethod.invoke(testObj2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

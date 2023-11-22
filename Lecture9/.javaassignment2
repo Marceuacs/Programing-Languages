@@ -1,0 +1,63 @@
+class Test {
+    private String s;
+
+    // Constructor with no parameters
+    public Test() {
+        this.s = "Programming languages";
+    }
+
+    // Constructor with one parameter
+    public Test(String s) {
+        this.s = s;
+    }
+
+    public void method1(String paramName) {
+        System.out.println("Value of " + paramName + ": " + s);
+    }
+
+    public void method2(int n) {
+        System.out.println("Value of n: " + n);
+    }
+
+    private void method3() {
+        System.out.println("Private method is invoked");
+    }
+
+    // Getter for the private field s
+    public String getS() {
+        return s;
+    }
+
+    // Setter for the private field s
+    public void setS(String s) {
+        this.s = s;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create an object of the Test class using the default constructor
+        Test testObj = new Test();
+
+        // Invoke method1 by providing the parameter name
+        testObj.method1("paramName");
+
+        // Invoke method1 by providing the parameter name and parameter class
+        try {
+            java.lang.reflect.Method method1 = Test.class.getDeclaredMethod("method1", String.class);
+            method1.invoke(testObj, "paramName");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Print the value of the field s using the public getter method
+        System.out.println("Value of field s: " + testObj.getS());
+
+        // Change the value of s using the public setter method
+        testObj.setS("New Value");
+        System.out.println("Updated value of field s: " + testObj.getS());
+
+        // Invoke method3 using the public method
+        testObj.method3();  // This will result in a compilation error because method3 is private
+    }
+}

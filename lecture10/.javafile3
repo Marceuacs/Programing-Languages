@@ -1,0 +1,45 @@
+import java.io.*;
+
+class SimpleStudent implements Serializable {
+    String name;
+    int age;
+}
+
+public class SimpleStudentDemo {
+    public static void main(String[] args) {
+        SimpleStudent student = new SimpleStudent();
+        student.name = "John";
+        student.age = 20;
+
+        saveStudentData(student, "student_data.txt");
+
+        SimpleStudent readStudent = loadStudentData("student_data.txt");
+    }
+
+    public static void saveStudentData(SimpleStudent student, String filename) {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filename))) {
+            objectOutputStream.writeObject(student);
+            System.out.println("Student data saved to file: " + filename);
+            printStudentInfo(student);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static SimpleStudent loadStudentData(String filename) {
+        SimpleStudent student = null;
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename))) {
+            student = (SimpleStudent) objectInputStream.readObject();
+            System.out.println("Student data loaded from file: " + filename);
+            printStudentInfo(student);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return student;
+    }
+
+    public static void printStudentInfo(SimpleStudent student) {
+        System.out.println("Student Name: " + student.name);
+        System.out.println("Student Age: " + student.age);
+    }
+}

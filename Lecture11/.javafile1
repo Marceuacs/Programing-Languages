@@ -1,0 +1,38 @@
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
+class Student {
+    String name;
+    int indexNo;
+    int age;
+
+    public Student(String name, int indexNo, int age) {
+        this.name = name;
+        this.indexNo = indexNo;
+        this.age = age;
+    }
+}
+
+public class Demo {
+
+    public static Student createStudent(String name, int indexNo) {
+        Random rand = new Random();
+        int age = rand.nextInt(13) + 18;  // Generates a random age between 18 and 30
+        return new Student(name, indexNo, age);
+    }
+
+    public static void printValues(Student s) {
+        System.out.println("Name: " + s.name + ", Index Number: " + s.indexNo + ", Age: " + s.age);
+    }
+
+    public static void main(String[] args) {
+        List<String> names = List.of("Alice", "Bob", "Charlie", "David", "Eve");
+
+        List<Student> students = names.stream()
+                .map(name -> createStudent(name, new Random().nextInt(10000) + 1))
+                .collect(Collectors.toList());
+
+        students.forEach(Demo::printValues);
+    }
+}

@@ -1,0 +1,60 @@
+import java.util.ArrayList;
+import java.util.List;
+
+// Our basic Student class with name and age
+class Student {
+    String name;
+    int age;
+
+    // A simple constructor for our Student class
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+// Our main class where everything happens
+public class StudentListProcessor {
+    public static void main(String[] args) {
+        // Let's create a list of students
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("Peter", 22));
+        students.add(new Student("Paul", 24));
+        students.add(new Student("Alice", 26));
+        students.add(new Student("Bob", 28));
+
+        // We're going to find students whose names start with 'P' and put them in a new list
+        List<Student> pStudents = new ArrayList<>();
+        for (Student student : students) {
+            if (student.name.startsWith("P")) {
+                pStudents.add(student);
+            }
+        }
+
+        // Now, let's print the students whose names start with 'P'
+        System.out.println("Students whose names start with 'P':");
+        for (Student pStudent : pStudents) {
+            System.out.println(pStudent.name);
+        }
+
+        // Check if all students are younger than 25 and print the result
+        boolean allYoungerThan25 = true;
+        for (Student student : students) {
+            if (student.age >= 25) {
+                allYoungerThan25 = false;
+                break;
+            }
+        }
+        System.out.println("Are all students younger than 25? " + allYoungerThan25);
+
+        // Check if at least one student is younger than 25 and print the result
+        boolean atLeastOneYoungerThan25 = false;
+        for (Student student : students) {
+            if (student.age < 25) {
+                atLeastOneYoungerThan25 = true;
+                break;
+            }
+        }
+        System.out.println("Is at least one student younger than 25? " + atLeastOneYoungerThan25);
+    }
+}

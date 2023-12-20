@@ -1,0 +1,46 @@
+package Processor;
+
+import java.util.Scanner;
+
+public class TextProcessor {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Keep asking for input until "END" is entered
+        while (true) {
+            System.out.print("Enter text (type 'END' to finish): ");
+            String text = scanner.nextLine();
+
+            // Check if the input is "END" to exit the loop
+            if (text.equals("END")) {
+                System.out.println("Thank you for using the program.");
+                break;
+            }
+
+            // Calculate and display the length and weight of the text
+            int length = calculateLength(text);
+            int weight = calculateWeight(text);
+            
+            System.out.println("Text: '" + text + "' | Length: " + length + " | Weight: " + weight);
+        }
+
+        // Close the scanner
+        scanner.close();
+    }
+
+    // Calculate the length of the text
+    private static int calculateLength(String text) {
+        return text.length();
+    }
+
+    // Calculate the weight of the text by summing ASCII values
+    private static int calculateWeight(String text) {
+        int weight = 0;
+        for (int i = 0; i < text.length(); i++) {
+            char currentChar = text.charAt(i);
+            weight += (int) currentChar;
+        }
+        return weight;
+    }
+}
